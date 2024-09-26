@@ -3,31 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MauiTestApp"
              xmlns:viewmodel="clr-namespace:MauiTestApp.ViewModels"
-             xmlns:converter="clr-namespace:MauiTestApp.Converter"
+             xmlns:components="clr-namespace:MauiTestApp.Components"
              x:Class="MauiTestApp.Views.MainPage">
 
     <ContentPage.BindingContext>
         <viewmodel:MainPageViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
-        <converter:EnumConverter x:Key="enumConverter" />
+        <components:EnumConverter x:Key="enumConverter" />
     </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Label  x:Name="distanceLabel" Text="{Binding SelectedDistance, Mode=TwoWay, Converter={StaticResource enumConverter}}"/>
+            
+            <Label  x:Name="distanceLabel" Text="{components:CultureUpdateBinding SelectedDistance, Mode=TwoWay}"/>
             <Button Text="Reset" Command="{Binding ResetCommand}"/>
             <Button Text="Set" Command="{Binding SetCommand}"/>
             <Button Text="Set Manually" Clicked="Button_Clicked"/>
 
-            <Label  x:Name="currentDistanceLabel" Text="Current Distance"/>
-            <Button Text="Update current" Clicked="Button_Clicked_1"/>
-
-            <Picker Title="Select Distance"
-                ItemsSource="{Binding SelectedDistance}"
-                ItemDisplayBinding="{Binding SelectableDistances}" />
+            <Label  Text="{Binding SelectedDistance, Mode=OneWay, Converter={StaticResource enumConverter}}"/>
+ 
         </VerticalStackLayout>
     </ScrollView>
 

@@ -12,12 +12,14 @@ namespace MauiTestApp.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            distanceLabel.Text = DistanceEnum.Distance100km.ToString();
-        }
-
-        private void Button_Clicked_1(object sender, EventArgs e)
-        {
-            currentDistanceLabel.Text = ((MainPageViewModel)BindingContext).SelectedDistance.ToString();
+            if (distanceLabel.Text == DistanceEnum.Distance100km.ToString())
+            {
+                distanceLabel.Text = DistanceEnum.Distance75km.ToString();
+            }
+            else
+            {
+                distanceLabel.Text = DistanceEnum.Distance100km.ToString();
+            }
         }
     }
 

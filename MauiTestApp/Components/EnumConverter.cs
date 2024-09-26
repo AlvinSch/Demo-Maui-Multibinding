@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MauiTestApp.Converter
+namespace MauiTestApp.Components
 {
 
     public class EnumConverter : IValueConverter
