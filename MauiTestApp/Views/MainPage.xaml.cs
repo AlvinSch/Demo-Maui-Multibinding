@@ -12,14 +12,16 @@ namespace MauiTestApp.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            if (distanceLabel.Text == DistanceEnum.Distance100km.ToString())
-            {
-                distanceLabel.Text = DistanceEnum.Distance75km.ToString();
-            }
-            else
-            {
-                distanceLabel.Text = DistanceEnum.Distance100km.ToString();
-            }
+            distanceMultiBindingLabel.Text = distanceMultiBindingLabel.Text == DistanceEnum.Distance75km.ToString()
+                ? DistanceEnum.Distance100km.ToString()
+                : DistanceEnum.Distance75km.ToString();
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            distanceBindingLabel.Text = distanceBindingLabel.Text == DistanceEnum.Distance75km.ToString()
+                ? DistanceEnum.Distance100km.ToString()
+                : DistanceEnum.Distance75km.ToString();
         }
     }
 

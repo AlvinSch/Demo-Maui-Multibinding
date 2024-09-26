@@ -14,18 +14,29 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            
-            <Label  x:Name="distanceLabel" Text="{components:CultureUpdateBinding SelectedDistance, Mode=TwoWay}"/>
-            <Button Text="Reset" Command="{Binding ResetCommand}"/>
-            <Button Text="Set" Command="{Binding SetCommand}"/>
-            <Button Text="Set Manually" Clicked="Button_Clicked"/>
+        <Grid Padding="20" RowSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Label  Text="{Binding SelectedDistance, Mode=OneWay, Converter={StaticResource enumConverter}}"/>
- 
-        </VerticalStackLayout>
+            <Label  Grid.Column="0" Grid.Row="0" Text="Binding: "/>
+            <Label  Grid.Column="1" Grid.Row="0" x:Name="distanceBindingLabel" Text="{Binding SelectedDistance, Mode=TwoWay, Converter={StaticResource enumConverter}}"/>
+            <Label  Grid.Column="0" Grid.Row="1" Text="MultiBinding: "/>
+            <Label  Grid.Column="1" Grid.Row="1" x:Name="distanceMultiBindingLabel" Text="{components:CultureUpdateBinding SelectedDistance, Mode=TwoWay}"/>
+            <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="Set Property 20" Command="{Binding ResetCommand}"/>
+            <Button Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="Set Property 50" Command="{Binding SetCommand}"/>
+            <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Text="Set Element 75/100 (Binding)" Clicked="Button_Clicked_1"/>
+            <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="Set Element 75/100 (MultiBinding)" Clicked="Button_Clicked"/>
+        </Grid>
     </ScrollView>
 
 </ContentPage>
