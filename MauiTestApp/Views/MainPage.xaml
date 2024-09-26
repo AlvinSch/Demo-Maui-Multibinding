@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiTestApp"
+             xmlns:viewmodel="clr-namespace:MauiTestApp.ViewModels"
+             xmlns:converter="clr-namespace:MauiTestApp.Converter"
+             x:Class="MauiTestApp.Views.MainPage">
+
+    <ContentPage.BindingContext>
+        <viewmodel:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <converter:EnumConverter x:Key="enumConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Label  x:Name="distanceLabel" Text="{Binding SelectedDistance, Mode=TwoWay, Converter={StaticResource enumConverter}}"/>
+            <Button Text="Reset" Command="{Binding ResetCommand}"/>
+            <Button Text="Set" Command="{Binding SetCommand}"/>
+            <Button Text="Set Manually" Clicked="Button_Clicked"/>
+
+            <Label  x:Name="currentDistanceLabel" Text="Current Distance"/>
+            <Button Text="Update current" Clicked="Button_Clicked_1"/>
+
+            <Picker Title="Select Distance"
+                ItemsSource="{Binding SelectedDistance}"
+                ItemDisplayBinding="{Binding SelectableDistances}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
