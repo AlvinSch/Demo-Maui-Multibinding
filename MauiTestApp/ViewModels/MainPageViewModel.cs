@@ -10,8 +10,20 @@ namespace MauiTestApp.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ICommand ResetCommand { get; private set; }
-        public ICommand SetCommand { get; private set; }
+        public ICommand Set20Command { get; private set; }
+        public ICommand Set50Command { get; private set; }
+        public ICommand InvalidateCommand { get; private set; }
+
+        private bool _invalidation = false;
+        public bool Invalidation
+        {
+            get { return _invalidation; }
+            set
+            {
+                var result = SetTransientProperty(ref _invalidation, value, OnPropertyChanged);
+                return;
+            }
+        }
 
         private DistanceEnum _selectedDistance = DistanceEnum.Distance20km;
         public DistanceEnum SelectedDistance
@@ -40,8 +52,9 @@ namespace MauiTestApp.ViewModels
 
         public MainPageViewModel()
         {
-            ResetCommand = new Command(() => SelectedDistance = DistanceEnum.Distance20km);
-            SetCommand = new Command(() => SelectedDistance = DistanceEnum.Distance50km);
+            Set20Command = new Command(() => SelectedDistance = DistanceEnum.Distance20km);
+            Set50Command = new Command(() => SelectedDistance = DistanceEnum.Distance50km);
+            InvalidateCommand = new Command(() => Invalidation = !Invalidation);
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>

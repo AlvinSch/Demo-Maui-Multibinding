@@ -3,7 +3,7 @@
 namespace MauiTestApp.Components
 {
     [ContentProperty(nameof(Path))]
-    public class CultureUpdateBinding : IMarkupExtension<BindingBase>
+    public class InvalidationBinding : IMarkupExtension<BindingBase>
     {
         /// <summary>
         /// Pfad zur Enum-Property (analog <see cref="Microsoft.Maui.Controls.Xaml"/>)
@@ -20,6 +20,8 @@ namespace MauiTestApp.Components
         /// </summary>
         public object? Source { get; set; }
 
+        public string? PathInvalidation { get; set; }
+
         object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider) => ProvideValue(serviceProvider);
 
         public BindingBase ProvideValue(IServiceProvider serviceProvider)
@@ -27,11 +29,10 @@ namespace MauiTestApp.Components
 
             var result = new MultiBinding
             {
-                Converter = new UpdateEnumMultiConverter(),
+                Converter = new InvalidationEnumMultiConverter(),
                 Bindings = new List<BindingBase>
                 {
-                    // invalidate Bindings on culture change
-                    new Binding(path: nameof(CultureInfo.CurrentUICulture), BindingMode.OneWay, source: CultureInfo.CurrentUICulture),
+                    new Binding(path: PathInvalidation, BindingMode.OneWay, source: Source),
                     new Binding(path: Path, mode: Mode, source: Source)
                 },
                 Mode = Mode
