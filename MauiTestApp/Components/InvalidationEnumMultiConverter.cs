@@ -45,14 +45,16 @@ namespace MauiTestApp.Components
                 throw new NotImplementedException();
             }
 
+            var invalidation = false;
             var valueString = value as string;
             if (valueString != null && valueString.StartsWith(INVALIDATION_MARKER))
             {
+                invalidation = true;
                 valueString = valueString.Replace(INVALIDATION_MARKER, string.Empty);
             }
 
             var targetType = targetTypes[1];
-            return new object[] { null, _enumConverter.ConvertBack(valueString, targetType, parameter, culture) };
+            return new object[] { invalidation, _enumConverter.ConvertBack(valueString, targetType, parameter, culture) };
         }
     }
 }
