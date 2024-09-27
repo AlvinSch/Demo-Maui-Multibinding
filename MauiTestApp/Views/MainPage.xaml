@@ -32,7 +32,7 @@
             <Label  Grid.Column="0" Grid.Row="0" Text="Binding: "/>
             <Entry  Grid.Column="1" Grid.Row="0" x:Name="distanceBindingLabel" IsReadOnly="True" Text="{Binding SelectedDistance, Mode=TwoWay, Converter={StaticResource enumConverter}}"/>
             <Label  Grid.Column="0" Grid.Row="1" Text="MultiBinding: "/>
-            <Entry  Grid.Column="1" Grid.Row="1" x:Name="distanceMultiBindingLabel" IsReadOnly="True" Text="{components:InvalidationBinding SelectedDistance, Mode=TwoWay, PathInvalidation=Invalidation}"/>
+            <Entry  Grid.Column="1" Grid.Row="1" x:Name="distanceMultiBindingLabel" IsReadOnly="True" Text="{components:InvalidationMultiBinding SelectedDistance, Mode=TwoWay, PathInvalidation=Invalidation, Converter={StaticResource enumConverter}}"/>
             <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="Set Property 20" Command="{Binding Set20Command}"/>
             <Button Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="Set Property 50" Command="{Binding Set50Command}"/>
             <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Text="Set Element 75/100 (Binding)" Clicked="ElementBinding_Button_Clicked"/>

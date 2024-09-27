@@ -14,9 +14,10 @@ namespace MauiTestApp.Components
             if (value == null || value is not Enum)
             {
                 throw new NotImplementedException();
+                //return Binding.DoNothing;
             }
 
-          return value.ToString();
+            return value.ToString();
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

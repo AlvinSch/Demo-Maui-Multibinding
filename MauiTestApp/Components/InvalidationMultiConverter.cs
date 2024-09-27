@@ -2,14 +2,15 @@
 
 namespace MauiTestApp.Components
 {
-    internal class InvalidationEnumMultiConverter : IMultiValueConverter
+    internal class InvalidationMultiConverter : IMultiValueConverter
     {
-        private readonly EnumConverter _enumConverter = new();
+        private readonly IValueConverter? _converter;
 
         private const string INVALIDATION_MARKER = "(i)";
 
-        public InvalidationEnumMultiConverter()
+        public InvalidationMultiConverter(IValueConverter? converter)
         {
+            _converter = converter;
         }
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -22,18 +23,18 @@ namespace MauiTestApp.Components
             var value0 = values[0] as bool?;
             if (value0 == null)
             {
-                return null;
+                return Binding.DoNothing;
             }
             
 
-            var value1 = values[1] as Enum;
+            var value1 = values[1];
             if (value1 == null)
             {
-                return null;
+                return Binding.DoNothing;
             }
 
             var prefix = value0 == true ? INVALIDATION_MARKER : "";
-            var result = _enumConverter.Convert(value1, targetType, parameter, culture);
+            var result = _converter?.Convert(value1, targetType, parameter, culture);
 
             return $"{prefix}{result}";
         }
@@ -54,7 +55,8 @@ namespace MauiTestApp.Components
             }
 
             var targetType = targetTypes[1];
-            return new object[] { invalidation, _enumConverter.ConvertBack(valueString, targetType, parameter, culture) };
+            var result = _converter?.ConvertBack(valueString, targetType, parameter, culture);
+            return new object[] { invalidation, result };
         }
     }
 }
