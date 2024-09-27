@@ -34,7 +34,7 @@ namespace MauiTestApp.Components
             }
 
             var prefix = value0 == true ? INVALIDATION_MARKER : "";
-            var result = _converter?.Convert(value1, targetType, parameter, culture);
+            var result = _converter == null ? System.Convert.ChangeType(value1, targetType) : _converter.Convert(value1, targetType, parameter, culture);
 
             return $"{prefix}{result}";
         }
@@ -55,7 +55,7 @@ namespace MauiTestApp.Components
             }
 
             var targetType = targetTypes[1];
-            var result = _converter?.ConvertBack(valueString, targetType, parameter, culture);
+            var result = _converter == null ? System.Convert.ChangeType(value, targetType) : _converter.ConvertBack(valueString, targetType, parameter, culture);
             return new object[] { invalidation, result };
         }
     }
